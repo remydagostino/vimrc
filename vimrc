@@ -35,6 +35,9 @@ set pastetoggle=<F2>
 set showmode
 nmap \p "*p
 
+" Underline in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+
 " Shortcut for NERDTree
 nmap <leader>ne :NERDTree<cr>
 
