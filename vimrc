@@ -16,6 +16,13 @@ Plugin 'Lokaltog/vim-easymotion'
 " Nerd Tree (project structure)
 Plugin 'scrooloose/nerdtree'
 
+" Lorem Ipsum
+Plugin 'vim-scripts/loremipsum'
+
+" Syntax Highlighting
+Plugin 'groenewege/vim-less'
+Plugin 'digitaltoad/vim-jade'
+
 " all plugins are loaded
 call vundle#end()
 filetype plugin indent on
@@ -26,8 +33,7 @@ map <Leader> <Plug>(easymotion-prefix)
 "}}
 
 " Clipboard
-set clipboard=unnamed
-set backspace=2
+set clipboard=unnamedplus
 
 " Copy/Paste
 nnoremap <F2> :set invpaste paste?<CR>
@@ -102,9 +108,6 @@ set hlsearch
 " Clear any search highlighting with spacespace
 nmap <SPACE> <SPACE>:noh<CR>
 
-" Since I use linux, I want this
-let g:clipbrdDefaultReg = '+'
-
 " When I close a tab, remove the buffer
 set nohidden
 
@@ -130,3 +133,33 @@ nnoremap <silent> <C-t> :tabnew<CR>
 " Show whitspace
 set list
 set listchars=tab:>-,trail:~,extends:>,precedes:<
+
+" Fix autocompletion {{
+
+" Always select the longest option, always show the menu
+set completeopt=longest,menuone
+
+" Allow <enter> to be used to select a completion
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Make up and down work in the autocompelet menu
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" open omni completion menu closing previous if open and opening new menu without changing the text
+inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" open user completion menu closing previous if open and opening new menu without changing the text
+inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+
+" Specific filetype autocompletion
+filetype plugin on
+au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
+au FileType css setl ofu=csscomplete#CompleteCSS
+
+" }}
+
