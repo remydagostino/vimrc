@@ -1,3 +1,5 @@
+" Btw, reload while editing with :so %
+
 "missc Settings
 colorscheme desert
 let mapleader = ","
@@ -10,18 +12,32 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+"ADD PLUGINS HERE :
+":PluginInstall to install
+
 " Easy Motion (file navigation)
 Plugin 'Lokaltog/vim-easymotion'
 
 " Nerd Tree (project structure)
 Plugin 'scrooloose/nerdtree'
 
+" Emmet (zencoding)
+Plugin 'mattn/emmet-vim'
+
 " Lorem Ipsum
 Plugin 'vim-scripts/loremipsum'
 
+" Clojure
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
+
 " Syntax Highlighting
+Plugin 'hail2u/vim-css3-syntax'
 Plugin 'groenewege/vim-less'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'plasticboy/vim-markdown'
+
+Bundle 'JulesWang/css.vim'
 
 " all plugins are loaded
 call vundle#end()
@@ -149,12 +165,8 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" open omni completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-" open user completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" Swp files are stupid
+set noswapfile
 
 " Specific filetype autocompletion
 filetype plugin on
