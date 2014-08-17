@@ -24,6 +24,15 @@ Plugin 'scrooloose/nerdtree'
 " Emmet (zencoding)
 Plugin 'mattn/emmet-vim'
 
+" Code Commenting (`gc` to comment out lines)
+Plugin 'tpope/vim-commentary'
+
+" Control P fuzzy finding
+Plugin 'kien/ctrlp.vim'
+
+" Git Integration
+Plugin 'tpope/vim-fugitive'
+
 " Lorem Ipsum
 Plugin 'vim-scripts/loremipsum'
 
